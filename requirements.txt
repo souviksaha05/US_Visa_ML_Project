@@ -8,4 +8,6 @@ xgboost
 Flask
 ipykernel
 imbalanced-learn
+dill
+PyYAML
 #-e .
