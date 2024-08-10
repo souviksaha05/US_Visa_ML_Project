@@ -5,7 +5,9 @@ import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler,OrdinalEncoder, PowerTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler,OrdinalEncoder, PowerTransformer,LabelEncoder
+
+
 
 from src.exception import CustomException
 from src.logger import logging
@@ -98,7 +100,19 @@ class DataTransformation:
             input_feature_test_df.drop('yr_of_estab', inplace=True, axis=1)
 
             logging.info(f"input_feature_test_df columns: {input_feature_test_df.columns}")
-            logging.info(f"input_feature_test_df head: \n{input_feature_test_df.head()}")
+            logging.info(f"input_feature_test_df head: \n{input_feature_test_df.head()}")# Apply Label Encoding to target variable
+           
+            label_encoder = LabelEncoder()
+            target_feature_train_df = label_encoder.fit_transform(target_feature_train_df)
+            target_feature_test_df = label_encoder.transform(target_feature_test_df)
+
+            logging.info("Label Encoding applied on target variable")
+
+            logging.info(f"Applying preprocessing object on training dataframe and testing dataframe.")
+
+
+            
+            
 
             logging.info(f"Applying preprocessing object on training dataframe and testing dataframe.")
 
